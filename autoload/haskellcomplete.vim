@@ -6,6 +6,11 @@
 
 " Language extensions from:
 "   https://hackage.haskell.org/package/Cabal-2.2.0.1/docs/Language-Haskell-Extension.html
+"
+" GHC options from:
+"   https://downloads.haskell.org/~ghc/7.0.4/docs/html/users_guide/flag-reference.html
+"   https://downloads.haskell.org/~ghc/8.4.3/docs/html/users_guide/flags.html
+
 
 
 " Available completions
