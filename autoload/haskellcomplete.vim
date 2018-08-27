@@ -4,6 +4,10 @@
 " URL:             https://github.com/alx741/haskellcomplete.vim
 " Last Change:     2018 Aug 26
 
+" Language extensions from:
+"   https://hackage.haskell.org/package/Cabal-2.2.0.1/docs/Language-Haskell-Extension.html
+
+
 let b:completingLangExtension = 0
 
 function! haskellcomplete#Complete(findstart, base)
@@ -25,12 +29,19 @@ function! haskellcomplete#Complete(findstart, base)
     if b:completingLangExtension
         if a:base ==? ""
             " Return all posible Lang extensions
-            echomsg "ALL extensions"
             return s:langExtensions
         else
-            echomsg "dont know yet"
+            let l:matches = []
+            for extension in s:langExtensions
+                if extension =~? a:base
+                    call add(l:matches, extension)
+                endif
+            endfor
+            return l:matches
         endif
     endif
+
+    return -1
 endfunction
 
 let s:langExtensions =
