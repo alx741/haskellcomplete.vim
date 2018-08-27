@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cabal info $1 | awk -k getModules.awk | sed 's/ //g'
+cabal info $1 | awk -f getModules.awk | sed 's/ //g'

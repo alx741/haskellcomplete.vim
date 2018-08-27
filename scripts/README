@@ -1,0 +1,3 @@
+Obtain a list of the modules in the `packages` file with:
+
+    $ ./listModules.sh > modules
