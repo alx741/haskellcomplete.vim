@@ -8,7 +8,9 @@
 "   https://hackage.haskell.org/package/Cabal-2.2.0.1/docs/Language-Haskell-Extension.html
 
 
+" Available completions
 let b:completingLangExtension = 0
+let b:completingOptionsGHC    = 0
 
 function! haskellcomplete#Complete(findstart, base)
     if a:findstart
@@ -21,6 +23,14 @@ function! haskellcomplete#Complete(findstart, base)
             endwhile
             let b:completingLangExtension = 1
             return l:start
+
+        elseif l:line =~ '^\s*{-#\s*OPTIONS_GHC.*'
+            while l:start >= 0 && l:line[l:start - 1] !~ '[, ]'
+                let l:start -= 1
+            endwhile
+            let b:completingOptionsGHC = 1
+            return l:start
+
         endif
 
         return start
@@ -33,12 +43,28 @@ function! haskellcomplete#Complete(findstart, base)
         else
             let l:matches = []
             for extension in s:langExtensions
-                if extension =~? a:base
+                if extension =~? '^' . a:base
                     call add(l:matches, extension)
                 endif
             endfor
             return l:matches
         endif
+
+
+    elseif b:completingOptionsGHC
+        if a:base ==? ""
+            " Return all posible GHC options
+            return s:optionsGHC
+        else
+            let l:matches = []
+            for flag in s:optionsGHC
+                if flag =~? '^' . a:base
+                    call add(l:matches, flag)
+                endif
+            endfor
+            return l:matches
+        endif
+
     endif
 
     return -1
