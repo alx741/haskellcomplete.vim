@@ -63,6 +63,7 @@ function! haskellcomplete#Complete(findstart, base)
                     call add(l:matches, extension)
                 endif
             endfor
+            let b:completingLangExtension = 0
             return l:matches
         endif
 
@@ -78,6 +79,7 @@ function! haskellcomplete#Complete(findstart, base)
                     call add(l:matches, flag)
                 endif
             endfor
+            let b:completingOptionsGHC = 0
             return l:matches
         endif
 
@@ -93,6 +95,7 @@ function! haskellcomplete#Complete(findstart, base)
                     call add(l:matches, module)
                 endif
             endfor
+            let b:completingModule = 0
             return l:matches
         endif
 
